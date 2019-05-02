@@ -9,9 +9,13 @@ namespace Battleship
     class Piece
     {
         //member variables (HAS A)
+        //size
 
         //constructor (SPAWNER)
+        public Piece()
+        {
 
+        }
         //member methods (CAN DO)
     }
 }

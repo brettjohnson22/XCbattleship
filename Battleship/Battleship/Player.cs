@@ -9,9 +9,25 @@ namespace Battleship
     class Player
     {
         //member variables (HAS A)
+        public string name;
+        public Board myBoard;
+        public Board targetBoard;
 
         //constructor (SPAWNER)
+        public Player()
+        {
 
+        }
         //member methods (CAN DO)
+
+        public void PlacePiece()
+        {
+
+        }
+        public void LaunchAttack(int x, int y)
+        {
+
+        }
+
     }
 }

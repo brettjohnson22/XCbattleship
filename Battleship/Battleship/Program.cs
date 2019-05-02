@@ -10,35 +10,14 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-            char[,] board = new char[22, 22];
-            for (int i = 0; i < 22; i++)
-            {
-                for (int j = 0; j < 22; j++)
-                {
-                    if(i == 0 || i == 21)
-                    {
-                    board[i, j] = '_';
-                    }
-                    else if(j == 0 || j == 21)
-                    {
-                        board[i, j] = '|';
-                    }
-                    else
-                    {
-                        board[i, j] = '.';
-                    }
-                }
-                Console.WriteLine();
-            }
-            for (int i = 0; i < 22; i++)
-            {
-                for(int j = 0; j < 22; j++)
-                {
-                    Console.Write(board[i, j]);
-                }
-                Console.WriteLine();
-            }
-            Console.ReadLine();
+
+            Board board = new Board();
+            board.GenerateBoard();
+            board.DisplayBoard();
+            board.DropChar(5, 10, 'X');
+            board.DisplayBoard();
+            board.ShowPiece();
+
             //Game game = new Game();
             //game.ResizeWindow();
             //Console.ReadLine();
@@ -61,6 +40,21 @@ namespace Battleship
 //char[,] array = new char[22, 22]
 //[row, column]
 //I need a way to display a board that shows the discovered values, but not the undiscovered values.
+//I need a way to link the two boards.
+//Attacks can check value against enemy's "My Board"
+//Once the board exists, it will hold values at all the indicies.
+//Attacks will change the values in the indicies of both boards.
+//targetBoards will start out blank. Each attack will change the "." to a miss or a hit.
+
+
+
+//Placing pieces
+    ////Display the piece in the upper left corner.
+    ////While !Enter, if "Right Key", layout[+1,] redisplay
+
+//Attacks need to check the value at the specified coordinates, then react in a certain way.
+////If ".", register a miss. Print Miss char to enemy's board.
+////If "B", register a hit. Print Hit char to enemy's board. Check to see if any adjacent values are also B.
 
 
 //Initial set up -- Get player names, determine who goes first
