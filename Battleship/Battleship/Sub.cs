@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    public abstract class Piece
+    public class Sub : Piece
     {
         //member variables (HAS A)
-        public int pieceSize;
 
         //constructor (SPAWNER)
-        public Piece()
+        public Sub()
         {
-
+            pieceSize = 3;
         }
         //member methods (CAN DO)
     }

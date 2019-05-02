@@ -27,19 +27,17 @@ namespace Battleship
             Console.WriteLine("What is Player Two's Name?");
             player2.name = Console.ReadLine();
         }
+        public void ResizeWindow()
+        {
+            Console.SetWindowSize(25, 25);
+            Console.WriteLine(Console.WindowWidth);
+            Console.WriteLine(Console.WindowHeight);
+
+        }
 
         public void PlayerTurn()
         {
 
         }
-
-
-        //public void ResizeWindow()
-        //{
-        //    Console.SetWindowSize(30, 30);
-        //    Console.WriteLine(Console.WindowWidth);
-        //    Console.WriteLine(Console.WindowHeight);
-
-        //}
     }
 }

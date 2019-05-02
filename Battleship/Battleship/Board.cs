@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Board
+    public class Board
     {
         //member variables (HAS A)
         public char[,] layout;
@@ -66,52 +66,46 @@ namespace Battleship
             layout[x, y] = '0';
             layout[x, y + 1] = '0';
             DisplayBoard();
+            bool KeepGoing = true;
+            do
             {
-                bool KeepGoing = true;
-                do
+                DisplayBoard();
+                ConsoleKey buttonPress = Console.ReadKey().Key;
+                if (buttonPress == ConsoleKey.RightArrow)
                 {
-                    ConsoleKey buttonPress = Console.ReadKey().Key;
-                    if (buttonPress == ConsoleKey.RightArrow)
-                    {
-                        layout[x, y] = '.';
-                        layout[x, y + 2] = '0';
-                        y++;
-                        DisplayBoard();
-                    }
-                    else if (buttonPress == ConsoleKey.DownArrow)
-                    {
-                        layout[x, y] = '.';
-                        layout[x, y + 1] = '.';
-                        layout[x + 1, y] = '0';
-                        layout[x + 1, y + 1] = '0';
-                        x++;
-                        DisplayBoard();
-                    }
-                    else if (buttonPress == ConsoleKey.LeftArrow)
-                    {
-                        layout[x, y + 1] = '.';
-                        layout[x, y - 1] = '0';
-                        y--;
-                        DisplayBoard();
-                    }
-                    else if (buttonPress == ConsoleKey.UpArrow)
-                    {
-                        layout[x, y] = '.';
-                        layout[x, y + 1] = '.';
-                        layout[x - 1, y] = '0';
-                        layout[x - 1, y + 1] = '0';
-                        x--;
-                        DisplayBoard();
-                    }
-                    else if (buttonPress == ConsoleKey.Enter)
-                    {
-                        DisplayBoard();
-                        KeepGoing = false;
-
-                    }
-                } while (KeepGoing);
-            }
-            
+                    layout[x, y] = '.';
+                    layout[x, y + 2] = '0';
+                    y++;
+                }
+                else if (buttonPress == ConsoleKey.DownArrow)
+                {
+                    layout[x, y] = '.';
+                    layout[x, y + 1] = '.';
+                    layout[x + 1, y] = '0';
+                    layout[x + 1, y + 1] = '0';
+                    x++;
+                }
+                else if (buttonPress == ConsoleKey.LeftArrow)
+                {
+                    layout[x, y + 1] = '.';
+                    layout[x, y - 1] = '0';
+                    y--;
+                }
+                else if (buttonPress == ConsoleKey.UpArrow)
+                {
+                    layout[x, y] = '.';
+                    layout[x, y + 1] = '.';
+                    layout[x - 1, y] = '0';
+                    layout[x - 1, y + 1] = '0';
+                    x--;
+                }
+                else if (buttonPress == ConsoleKey.Enter)
+                {
+                    KeepGoing = false;
+                }
+            } while (KeepGoing);
+            DisplayBoard();
+            Console.ReadLine();
         }
     }
 }

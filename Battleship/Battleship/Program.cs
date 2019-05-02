@@ -10,8 +10,9 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-
+            Game game = new Game();
             Board board = new Board();
+            game.ResizeWindow();
             board.GenerateBoard();
             board.DisplayBoard();
             board.DropChar(5, 10, 'X');
