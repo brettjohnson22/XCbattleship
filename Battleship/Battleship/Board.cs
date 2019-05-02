@@ -70,14 +70,15 @@ namespace Battleship
                 bool KeepGoing = true;
                 do
                 {
-                    if (Console.ReadKey().Key == ConsoleKey.RightArrow)
+                    ConsoleKey buttonPress = Console.ReadKey().Key;
+                    if (buttonPress == ConsoleKey.RightArrow)
                     {
                         layout[x, y] = '.';
                         layout[x, y + 2] = '0';
                         y++;
                         DisplayBoard();
                     }
-                    else if (Console.ReadKey().Key == ConsoleKey.DownArrow)
+                    else if (buttonPress == ConsoleKey.DownArrow)
                     {
                         layout[x, y] = '.';
                         layout[x, y + 1] = '.';
@@ -86,14 +87,14 @@ namespace Battleship
                         x++;
                         DisplayBoard();
                     }
-                    else if (Console.ReadKey().Key == ConsoleKey.LeftArrow)
+                    else if (buttonPress == ConsoleKey.LeftArrow)
                     {
                         layout[x, y + 1] = '.';
                         layout[x, y - 1] = '0';
                         y--;
                         DisplayBoard();
                     }
-                    else if (Console.ReadKey().Key == ConsoleKey.UpArrow)
+                    else if (buttonPress == ConsoleKey.UpArrow)
                     {
                         layout[x, y] = '.';
                         layout[x, y + 1] = '.';
@@ -102,7 +103,7 @@ namespace Battleship
                         x--;
                         DisplayBoard();
                     }
-                    else if (Console.ReadKey().Key == ConsoleKey.Enter)
+                    else if (buttonPress == ConsoleKey.Enter)
                     {
                         DisplayBoard();
                         KeepGoing = false;
