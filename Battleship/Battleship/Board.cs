@@ -8,5 +8,10 @@ namespace Battleship
 {
     class Board
     {
+        //member variables (HAS A)
+
+        //constructor (SPAWNER)
+
+        //member methods (CAN DO)
     }
 }
