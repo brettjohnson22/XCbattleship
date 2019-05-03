@@ -16,11 +16,12 @@ namespace Battleship
         public Piece sub;
         public Piece bShip;
         public Piece carrier;
+        public int score;
 
         //constructor (SPAWNER)
         public Player()
         {
-
+            score = 0;
         }
         //member methods (CAN DO)
         public void CreateBoards()
