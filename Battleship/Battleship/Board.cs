@@ -56,8 +56,7 @@ namespace Battleship
         public void PlacePiece(Piece movingPiece)
         {
             int x = 1;
-            int y = 1;
-            DropPiece(movingPiece, x, y);
+            int y = DropPiece(movingPiece, x);
             bool KeepGoing = true;
             do
             {
@@ -101,18 +100,50 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.Enter)
                 {
+                    //if(movingPiece.horizontal)
+                    //{
+                    //    layout[x, y] = '<';
+                    //    layout[x, y + (movingPiece.pieceSize - 1)] = '>';
+                    //}
+                    //else
+                    //{
+                    //    layout[x, y] = '^';
+                    //    layout[x + (movingPiece.pieceSize - 1), y] = 'v';
+                    //}
                     KeepGoing = false;
                 }
             }
             while (KeepGoing);
             DisplayBoard("");
         }
-        public void DropPiece(Piece movingPiece, int x, int y)
+        public int DropPiece(Piece movingPiece, int x)
         {
-            for (int i = 0; i < movingPiece.pieceSize; i++)
+            int y = 1;
+            int counter;
+            do
             {
-                layout[x, y + i] = '0';
+                counter = 0;
+                for (int i = 0; i < movingPiece.pieceSize; i++)
+                {
+                    if (layout[x, y + i] == '.')
+                    {
+                        counter++;
+                    }
+                }
+                if (counter == movingPiece.pieceSize)
+                {
+                    for (int i = 0; i < movingPiece.pieceSize; i++)
+                    {
+                        layout[x, y + i] = '0';
+                    }
+                }
+                else
+                {
+                    y++;
+                }
             }
+            while (counter != movingPiece.pieceSize);
+            return y;
         }
         public bool MovePieceRight(Piece movingPiece, int a, int b)
         {
