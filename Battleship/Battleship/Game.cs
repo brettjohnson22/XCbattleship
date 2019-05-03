@@ -50,6 +50,10 @@ namespace Battleship
             SetBoard(player1);
             SetBoard(player2);
             PlayerTurn(player1, player2);
+            PlayerTurn(player2, player1);
+            PlayerTurn(player1, player2);
+            PlayerTurn(player2, player1);
+
         }
 
         public void SetBoard(Player player)

@@ -20,6 +20,7 @@ namespace Battleship
         //constructor (SPAWNER)
         public Player()
         {
+
         }
         //member methods (CAN DO)
         public void CreateBoards()
