@@ -35,9 +35,11 @@ namespace Battleship
 
         public void PlayerTurn(Player currentplayer, Player currentopponent)
         {
-            currentopponent.myBoard.DisplayTargetBoard("Where would you like to attack?");
-            player1.myBoard.MoveCursor();
-
+            Console.WriteLine($"{currentplayer.name}'s Turn");
+            Console.ReadLine();
+            currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
+            int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
+            ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, coordinates[0], coordinates[1]);
         }
         public void RunGame()
         {
@@ -47,22 +49,37 @@ namespace Battleship
            // ResizeWindow();
             SetBoard(player1);
             SetBoard(player2);
+            PlayerTurn(player1, player2);
         }
 
         public void SetBoard(Player player)
         {
             Console.WriteLine($"{player.name}, hit 'Enter' to place your pieces.");
             Console.ReadLine();
-            player.CreateBoard();
+            player.CreateBoards();
             player.PlaceDestroyer();
             player.PlaceSub();
             player.PlaceBattleship();
             player.PlaceCarrier();
             Console.Clear();
-            Console.WriteLine("Enter to Proceed.");
-            Console.ReadLine();
         }
-
+        public void ResolveAttack(Board boardBeingAttacked, Board playersTargetBoard, int x, int y)
+        {
+            if (boardBeingAttacked.layout[x, y] == '0')
+            {
+                boardBeingAttacked.layout[x, y] = 'X';
+                playersTargetBoard.layout[x, y] = 'X';
+                Console.WriteLine("Hit!");
+                Console.ReadLine();
+            }
+            else
+            {
+                boardBeingAttacked.layout[x, y] = 'M';
+                playersTargetBoard.layout[x, y] = 'M';
+                Console.WriteLine("Miss!");
+                Console.ReadLine();
+            }
+        }
     }
 
 }

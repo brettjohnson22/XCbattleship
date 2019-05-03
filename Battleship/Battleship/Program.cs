@@ -60,3 +60,8 @@ namespace Battleship
 //P1 lays their ships -- Inform of ship types. Select type of ship. Select starting spot. Select ending spot. Update list, continue.
 //Clear screen. P2 lays their ships.
 //Clear screen. Show P2 battlefield
+
+
+
+//I need the cursor to move around a board that reflects hits and misses, but not enemy ship placement.
+//At the start of the turn, I need to create a new board that looks at 

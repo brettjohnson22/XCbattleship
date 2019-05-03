@@ -41,7 +41,7 @@ namespace Battleship
             }
         }
 
-        public void DisplayMyBoard(string Message)
+        public void DisplayBoard(string Message)
         {
             Console.Clear();
             for (int i = 0; i < 22; i++)
@@ -54,26 +54,26 @@ namespace Battleship
             }
             Console.WriteLine(Message);
         }
-        public void DisplayTargetBoard(string Message)
-        {
-            Console.Clear();
-            for (int i = 0; i < 22; i++)
-            {
-                for (int j = 0; j < 22; j++)
-                {
-                    if (layout[i, j] == '0')
-                    {
-                        Console.Write('.');
-                    }
-                    else
-                    {
-                        Console.Write(layout[i, j]);
-                    }
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine(Message);
-        }
+        //public void DisplayTargetBoard(string Message)
+        //{
+        //    Console.Clear();
+        //    for (int i = 0; i < 22; i++)
+        //    {
+        //        for (int j = 0; j < 22; j++)
+        //        {
+        //            if (layout[i, j] == '0')
+        //            {
+        //                Console.Write('.');
+        //            }
+        //            else
+        //            {
+        //                Console.Write(layout[i, j]);
+        //            }
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //    Console.WriteLine(Message);
+        //}
         public void PlacePiece(Piece movingPiece)
         {
             int x = 1;
@@ -82,7 +82,7 @@ namespace Battleship
             bool KeepGoing = true;
             do
             {
-                DisplayMyBoard($"Place your {movingPiece.name}. 'F' to flip, 'Enter' to proceed.");
+                DisplayBoard($"Place your {movingPiece.name}. 'F' to flip, 'Enter' to proceed.");
                 ConsoleKey buttonPress = Console.ReadKey().Key;
                 if (buttonPress == ConsoleKey.RightArrow)
                 {
@@ -126,7 +126,7 @@ namespace Battleship
                 }
             }
             while (KeepGoing);
-            DisplayMyBoard("");
+            DisplayBoard("");
         }
         public void DropPiece(Piece movingPiece, int x, int y)
         {
@@ -307,98 +307,103 @@ namespace Battleship
                 }
             }
         }
-        public void MoveCursor()
-        {
-            int x = 1;
-            int y = 1;
-            bool KeepGoing = true;
-            layout[x, y] = '+';
-            do
-            {
-                DisplayTargetBoard($"Where do you want to attack?");
-                ConsoleKey buttonPress = Console.ReadKey().Key;
-                if (buttonPress == ConsoleKey.RightArrow)
-                {
-                    bool moved = MoveCursorRight(x, y);
-                    if(moved)
-                    {
-                        y++;
-                    }
-                }
-                else if (buttonPress == ConsoleKey.LeftArrow)
-                {
-                    bool moved = MoveCursorLeft(x, y);
-                    if(moved)
-                    {
-                        y--;
-                    }
-                }
-                else if (buttonPress == ConsoleKey.UpArrow)
-                {
-                    bool moved = MoveCursorUp(x, y);
-                    if(moved)
-                    {
-                        x--;
-                    }
-                }
-                else if (buttonPress == ConsoleKey.DownArrow)
-                {
-                    bool moved = MoveCursorDown(x, y);
-                    if(moved)
-                    {
-                        x++;
-                    }
-                }
-                else if (buttonPress == ConsoleKey.Enter)
-                {
-                    KeepGoing = false;
-                }
-            }
-            while (KeepGoing);
-        }
-        public bool MoveCursorRight(int a, int b)
-        {
-            bool moved = false;
-            if (layout[a, b + 1] == '.')
-            {
-                layout[a, b] = '.';
-                layout[a, b + 1] = '+';
-                moved = true;
-            }
-            return moved;
-        }
-        public bool MoveCursorLeft(int a, int b)
-        {
-            bool moved = false;
-            if (layout[a, b - 1] == '.')
-            {
-                layout[a, b] = '.';
-                layout[a, b - 1] = '+';
-                moved = true;
-            }
-            return moved;
-        }
-        public bool MoveCursorUp(int a, int b)
-        {
-            bool moved = false;
-            if (layout[a - 1, b] == '.')
-            {
-                layout[a, b] = '.';
-                layout[a - 1, b] = '+';
-                moved = true;
-            }
-            return moved;
-        }
-        public bool MoveCursorDown(int a, int b)
-        {
-            bool moved = false;
-            if (layout[a + 1, b] == '.')
-            {
-                layout[a, b] = '.';
-                layout[a + 1, b] = '+';
-                moved = true;
-            }
-            return moved;
-        }
+        //public int[] AimAttack()
+        //{
+        //    int[] coordinates = new int[2];
+        //    int x = 1;
+        //    int y = 1;
+        //    bool KeepGoing = true;
+        //    layout[x, y] = '+';
+        //    do
+        //    {
+        //        DisplayTargetBoard($"Where do you want to attack?");
+        //        ConsoleKey buttonPress = Console.ReadKey().Key;
+        //        if (buttonPress == ConsoleKey.RightArrow)
+        //        {
+        //            bool moved = MoveCursorRight(x, y);
+        //            if(moved)
+        //            {
+        //                y++;
+        //            }
+        //        }
+        //        else if (buttonPress == ConsoleKey.LeftArrow)
+        //        {
+        //            bool moved = MoveCursorLeft(x, y);
+        //            if(moved)
+        //            {
+        //                y--;
+        //            }
+        //        }
+        //        else if (buttonPress == ConsoleKey.UpArrow)
+        //        {
+        //            bool moved = MoveCursorUp(x, y);
+        //            if(moved)
+        //            {
+        //                x--;
+        //            }
+        //        }
+        //        else if (buttonPress == ConsoleKey.DownArrow)
+        //        {
+        //            bool moved = MoveCursorDown(x, y);
+        //            if(moved)
+        //            {
+        //                x++;
+        //            }
+        //        }
+        //        else if (buttonPress == ConsoleKey.Enter)
+        //        {
+        //            coordinates[0] = x;
+        //            coordinates[1] = y;
+        //            KeepGoing = false;
+        //        }
+        //    }
+        //    while (KeepGoing);
+        //    return coordinates;
+        //}
+        //public bool MoveCursorRight(int a, int b)
+        //{
+        //    bool moved = false;
+        //    if (layout[a, b + 1] == '.')
+        //    {
+        //        layout[a, b] = '.';
+        //        layout[a, b + 1] = '+';
+        //        moved = true;
+        //    }
+        //    return moved;
+        //}
+        //public bool MoveCursorLeft(int a, int b)
+        //{
+        //    bool moved = false;
+        //    if (layout[a, b - 1] == '.')
+        //    {
+        //        layout[a, b] = '.';
+        //        layout[a, b - 1] = '+';
+        //        moved = true;
+        //    }
+        //    return moved;
+        //}
+        //public bool MoveCursorUp(int a, int b)
+        //{
+        //    bool moved = false;
+        //    if (layout[a - 1, b] == '.')
+        //    {
+        //        layout[a, b] = '.';
+        //        layout[a - 1, b] = '+';
+        //        moved = true;
+        //    }
+        //    return moved;
+        //}
+        //public bool MoveCursorDown(int a, int b)
+        //{
+        //    bool moved = false;
+        //    if (layout[a + 1, b] == '.')
+        //    {
+        //        layout[a, b] = '.';
+        //        layout[a + 1, b] = '+';
+        //        moved = true;
+        //    }
+        //    return moved;
+        //}
+
     }
 }
