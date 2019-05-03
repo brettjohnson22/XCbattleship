@@ -61,19 +61,6 @@ namespace Battleship
         }
         public void PlayerTurn(Player currentplayer, Player currentopponent)
         {
-            AttackOptions(currentplayer, currentopponent);
-            //Console.WriteLine($"{currentplayer.name}'s Turn.");
-            //Console.ReadLine();
-            //currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
-            //int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
-            //bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, coordinates[0], coordinates[1]);
-            //if(hit)
-            //{
-            //    currentplayer.score++;
-            //}
-        }
-        public void AttackOptions(Player currentplayer, Player currentopponent)
-        {
             bool keepGoing = true;
             do
             {

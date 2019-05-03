@@ -100,16 +100,6 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.Enter)
                 {
-                    //if(movingPiece.horizontal)
-                    //{
-                    //    layout[x, y] = '<';
-                    //    layout[x, y + (movingPiece.pieceSize - 1)] = '>';
-                    //}
-                    //else
-                    //{
-                    //    layout[x, y] = '^';
-                    //    layout[x + (movingPiece.pieceSize - 1), y] = 'v';
-                    //}
                     KeepGoing = false;
                 }
             }
