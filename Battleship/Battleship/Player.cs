@@ -60,10 +60,10 @@ namespace Battleship
             mytargetboard.layout[x, y] = '+';
             do
             {
-                char R = mytargetboard.layout[x, y + 1];
-                char L = mytargetboard.layout[x, y - 1];
-                char U = mytargetboard.layout[x - 1, y];
-                char D = mytargetboard.layout[x + 1, y];
+                //char R = mytargetboard.layout[x, y + 1];
+                //char L = mytargetboard.layout[x, y - 1];
+                //char U = mytargetboard.layout[x - 1, y];
+                //char D = mytargetboard.layout[x + 1, y];
                 
                 mytargetboard.DisplayBoard($"Where do you want to attack?");
                 ConsoleKey buttonPress = Console.ReadKey().Key;

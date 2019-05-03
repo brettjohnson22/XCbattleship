@@ -86,7 +86,7 @@ namespace Battleship
                     case "A":
                         currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
                         int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
-                        bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, coordinates[0], coordinates[1]);
+                        bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, currentopponent, coordinates[0], coordinates[1]);
                         if (hit)
                         {
                             currentplayer.score++;
@@ -104,14 +104,73 @@ namespace Battleship
             }
             while (keepGoing);
         }
-        public bool ResolveAttack(Board boardBeingAttacked, Board playersTargetBoard, int x, int y)
+        public bool ResolveAttack(Board boardBeingAttacked, Board playersTargetBoard, Player currentopponent, int x, int y)
         {
             bool hit = false;
-            if (boardBeingAttacked.layout[x, y] == '0')
+            if (boardBeingAttacked.layout[x, y] == 'D')
             {
                 boardBeingAttacked.layout[x, y] = 'X';
                 playersTargetBoard.layout[x, y] = 'X';
-                Console.WriteLine("Hit!");
+                currentopponent.destroyer.hitPointCounter--;
+                if (currentopponent.destroyer.hitPointCounter == 0)
+                {
+                    Console.WriteLine($"Hit! {currentopponent.name}'s Destroyer has sunk!");
+                }
+                else
+                {
+                    Console.WriteLine("Hit!");
+                }
+                hit = true;
+                Console.ReadLine();
+                Console.Clear();
+            }
+            else if (boardBeingAttacked.layout[x, y] == 'S')
+            {
+                boardBeingAttacked.layout[x, y] = 'X';
+                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.sub.hitPointCounter--;
+                if (currentopponent.sub.hitPointCounter == 0)
+                {
+                    Console.WriteLine($"Hit! {currentopponent.name}'s Submarine has sunk!");
+                }
+                else
+                {
+                    Console.WriteLine("Hit!");
+                }
+                hit = true;
+                Console.ReadLine();
+                Console.Clear();
+            }
+            else if (boardBeingAttacked.layout[x, y] == 'B')
+            {
+                boardBeingAttacked.layout[x, y] = 'X';
+                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.bShip.hitPointCounter--;
+                if (currentopponent.bShip.hitPointCounter == 0)
+                {
+                    Console.WriteLine($"Hit! {currentopponent.name}'s Battleship has sunk!");
+                }
+                else
+                {
+                    Console.WriteLine("Hit!");
+                }
+                hit = true;
+                Console.ReadLine();
+                Console.Clear();
+            }
+            else if (boardBeingAttacked.layout[x, y] == 'C')
+            {
+                boardBeingAttacked.layout[x, y] = 'X';
+                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.carrier.hitPointCounter--;
+                if (currentopponent.carrier.hitPointCounter == 0)
+                {
+                    Console.WriteLine($"Hit! {currentopponent.name}'s Aircraft Carrier has sunk!");
+                }
+                else
+                {
+                    Console.WriteLine("Hit!");
+                }
                 hit = true;
                 Console.ReadLine();
                 Console.Clear();
