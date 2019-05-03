@@ -121,8 +121,8 @@ namespace Battleship
             {
                 for (int i = 0; i < movingPiece.pieceSize; i++)
                 {
-                    layout[a, b + i] = '.';
-                    layout[a + 1, b + i] = '0';
+                    layout[a + i, b] = '.';
+                    layout[a + i, b + 1] = '0';
                 }
             }
         }
@@ -137,8 +137,8 @@ namespace Battleship
             {
                 for (int i = 0; i < movingPiece.pieceSize; i++)
                 {
-                    layout[a, b + i] = '.';
-                    layout[a - 1, b + i] = '0';
+                    layout[a + i, b] = '.';
+                    layout[a + i, b - 1] = '0';
                 }
             }
         }
@@ -154,8 +154,8 @@ namespace Battleship
             }
             else
             {
-                layout[a, b] = '.';
-                layout[a - movingPiece.pieceSize, b] = '0';
+                layout[a + (movingPiece.pieceSize - 1), b] = '.';
+                layout[a - 1, b] = '0';
             }
         }
         public void MoveDown(Piece movingPiece, int a, int b)
