@@ -43,10 +43,38 @@ namespace Battleship
         }
         public void GetPlayerNames()
         {
-            Console.WriteLine("What is Player One's Name?");
-            player1.name = Console.ReadLine();
-            Console.WriteLine("What is Player Two's Name?");
-            player2.name = Console.ReadLine();
+            bool validChoice = false;
+            while (!validChoice)
+            {
+                Console.WriteLine("What is Player One's Name?");
+                string nameInput = Console.ReadLine();
+                switch (nameInput)
+                {
+                    case "":
+                        Console.WriteLine("You must enter a name.");
+                        break;
+                    default:
+                        player1.name = nameInput;
+                        validChoice = true;
+                        break;
+                }
+            }
+            validChoice = false;
+            while (!validChoice)
+            {
+                Console.WriteLine("What is Player Two's Name?");
+                string nameInput = Console.ReadLine();
+                switch (nameInput)
+                {
+                    case "":
+                        Console.WriteLine("You must enter a name.");
+                        break;
+                    default:
+                        player2.name = nameInput;
+                        validChoice = true;
+                        break;
+                }
+            }
         }
         public void SetBoard(Player player)
         {
