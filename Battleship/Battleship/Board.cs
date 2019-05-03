@@ -71,25 +71,37 @@ namespace Battleship
             {
                 DisplayBoard();
                 ConsoleKey buttonPress = Console.ReadKey().Key;
-                if (buttonPress == ConsoleKey.RightArrow && layout[x, y + movingPiece.pieceSize] == '.')
+                if (buttonPress == ConsoleKey.RightArrow)
                 {
-                    MoveRight(movingPiece, x, y);
-                    y++;
+                    bool moved = MoveRight(movingPiece, x, y);
+                    if (moved)
+                    {
+                        y++;
+                    }
                 }
-                else if (buttonPress == ConsoleKey.LeftArrow && layout[x, y - 1] == '.')
+                else if (buttonPress == ConsoleKey.LeftArrow)
                 {
-                    MoveLeft(movingPiece, x, y);
-                    y--;
+                    bool moved = MoveLeft(movingPiece, x, y);
+                    if (moved)
+                    {
+                        y--;
+                    }
                 }
                 else if (buttonPress == ConsoleKey.UpArrow && x != 1)
                 {
-                    MoveUp(movingPiece, x, y);
-                    x--;
+                    bool moved = MoveUp(movingPiece, x, y);
+                    if (moved)
+                    {
+                        x--;
+                    }
                 }
                 else if (buttonPress == ConsoleKey.DownArrow && x != 20)
                 {
-                    MoveDown(movingPiece, x, y);
-                    x++;
+                    bool moved = MoveDown(movingPiece, x, y);
+                    if (moved)
+                    {
+                        x++;
+                    }
                 }
                 else if (buttonPress == ConsoleKey.F)
                 {
@@ -110,40 +122,49 @@ namespace Battleship
                 layout[x, y + i] = '0';
             }
         }
-        public void MoveRight(Piece movingPiece, int a, int b)
+        public bool MoveRight(Piece movingPiece, int a, int b)
         {
-            if (movingPiece.horizontal)
+            bool moved = false;
+            if (movingPiece.horizontal && layout[a, b + movingPiece.pieceSize] == '.')
             {
                 layout[a, b] = '.';
                 layout[a, b + movingPiece.pieceSize] = '0';
+                moved = true;
             }
-            else
+            else if (!movingPiece.horizontal)
             {
                 for (int i = 0; i < movingPiece.pieceSize; i++)
                 {
                     layout[a + i, b] = '.';
                     layout[a + i, b + 1] = '0';
                 }
+                moved = true;
             }
+            return moved;
         }
-        public void MoveLeft(Piece movingPiece, int a, int b)
+        public bool MoveLeft(Piece movingPiece, int a, int b)
         {
-            if (movingPiece.horizontal)
+            bool moved = false;
+            if (movingPiece.horizontal && layout[a, b - 1] == '.')
             {
                 layout[a, b + (movingPiece.pieceSize - 1)] = '.';
                 layout[a, b - 1] = '0';
+                moved = true;
             }
-            else
+            else if (!movingPiece.horizontal)
             {
                 for (int i = 0; i < movingPiece.pieceSize; i++)
                 {
                     layout[a + i, b] = '.';
                     layout[a + i, b - 1] = '0';
                 }
+                moved = true;
             }
+            return moved;
         }
-        public void MoveUp(Piece movingPiece, int a, int b)
+        public bool MoveUp(Piece movingPiece, int a, int b)
         {
+            bool moved = false;
             if (movingPiece.horizontal)
             {
                 for (int i = 0; i < movingPiece.pieceSize; i++)
@@ -151,15 +172,19 @@ namespace Battleship
                     layout[a, b + i] = '.';
                     layout[a - 1, b + i] = '0';
                 }
+                moved = true;
             }
-            else
+            else if (!movingPiece.horizontal && layout[a - 1, b] == '.')
             {
                 layout[a + (movingPiece.pieceSize - 1), b] = '.';
                 layout[a - 1, b] = '0';
+                moved = true;
             }
+            return moved;
         }
-        public void MoveDown(Piece movingPiece, int a, int b)
+        public bool MoveDown(Piece movingPiece, int a, int b)
         {
+            bool moved = false;
             if (movingPiece.horizontal)
             {
                 for (int i = 0; i < movingPiece.pieceSize; i++)
@@ -167,12 +192,15 @@ namespace Battleship
                     layout[a, b + i] = '.';
                     layout[a + 1, b + i] = '0';
                 }
+                moved = true;
             }
-            else
+            else if (!movingPiece.horizontal && layout[a + movingPiece.pieceSize, b] == '.')
             {
                 layout[a, b] = '.';
                 layout[a + movingPiece.pieceSize, b] = '0';
+                moved = true;
             }
+            return moved;
         }
         public void FlipPiece(Piece movingPiece, int a, int b)
         {
