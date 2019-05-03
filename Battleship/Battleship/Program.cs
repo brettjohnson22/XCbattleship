@@ -18,8 +18,6 @@ namespace Battleship
 //BUGS:Cursor placement after Hit/Miss in first square
 //Possible to trap cursor
 //
-//NEEDED FEATURES:
-//Identify when ships are sunk
 
 
 //I need to figure out how to display a gameboard (array of arrays?)

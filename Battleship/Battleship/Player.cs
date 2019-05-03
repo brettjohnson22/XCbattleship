@@ -57,6 +57,10 @@ namespace Battleship
             int x = 1;
             int y = 1;
             bool KeepGoing = true;
+            for(int i = 1; mytargetboard.layout[x, y] != '.'; i++)
+            {
+                y++;
+            }
             mytargetboard.layout[x, y] = '+';
             do
             {
