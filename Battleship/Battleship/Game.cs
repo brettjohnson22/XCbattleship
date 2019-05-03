@@ -34,8 +34,9 @@ namespace Battleship
 
         }
 
-        public void PlayerTurn()
+        public void PlayerTurn(Player currentplayer, Player currentopponent)
         {
+            currentopponent.myBoard.DisplayTargetBoard("Where would you like to attack?");
 
         }
         public void RunGame()
@@ -47,6 +48,7 @@ namespace Battleship
             player1.PlaceSub();
             player1.PlaceBattleship();
             player1.PlaceCarrier();
+            player1.myBoard.MoveCursor();
         }
     }
 

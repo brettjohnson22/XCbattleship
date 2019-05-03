@@ -26,7 +26,7 @@ namespace Battleship
                 {
                     if (i == 0 || i == 21)
                     {
-                        layout[i, j] = '_';
+                        layout[i, j] = '=';
                     }
                     else if (j == 0 || j == 21)
                     {
@@ -41,7 +41,7 @@ namespace Battleship
             }
         }
 
-        public void DisplayBoard(string Message)
+        public void DisplayMyBoard(string Message)
         {
             Console.Clear();
             for (int i = 0; i < 22; i++)
@@ -49,6 +49,26 @@ namespace Battleship
                 for (int j = 0; j < 22; j++)
                 {
                     Console.Write(layout[i, j]);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine(Message);
+        }
+        public void DisplayTargetBoard(string Message)
+        {
+            Console.Clear();
+            for (int i = 0; i < 22; i++)
+            {
+                for (int j = 0; j < 22; j++)
+                {
+                    if (layout[i, j] == '0')
+                    {
+                        Console.Write('.');
+                    }
+                    else
+                    {
+                        Console.Write(layout[i, j]);
+                    }
                 }
                 Console.WriteLine();
             }
@@ -62,11 +82,11 @@ namespace Battleship
             bool KeepGoing = true;
             do
             {
-                DisplayBoard($"Place your {movingPiece.name}. 'F' to flip, 'Enter' to proceed.");
+                DisplayMyBoard($"Place your {movingPiece.name}. 'F' to flip, 'Enter' to proceed.");
                 ConsoleKey buttonPress = Console.ReadKey().Key;
                 if (buttonPress == ConsoleKey.RightArrow)
                 {
-                    bool moved = MoveRight(movingPiece, x, y);
+                    bool moved = MovePieceRight(movingPiece, x, y);
                     if (moved)
                     {
                         y++;
@@ -74,7 +94,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.LeftArrow)
                 {
-                    bool moved = MoveLeft(movingPiece, x, y);
+                    bool moved = MovePieceLeft(movingPiece, x, y);
                     if (moved)
                     {
                         y--;
@@ -82,7 +102,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.UpArrow && x != 1)
                 {
-                    bool moved = MoveUp(movingPiece, x, y);
+                    bool moved = MovePieceUp(movingPiece, x, y);
                     if (moved)
                     {
                         x--;
@@ -90,7 +110,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.DownArrow && x != 20)
                 {
-                    bool moved = MoveDown(movingPiece, x, y);
+                    bool moved = MovePieceDown(movingPiece, x, y);
                     if (moved)
                     {
                         x++;
@@ -106,7 +126,7 @@ namespace Battleship
                 }
             }
             while (KeepGoing);
-            DisplayBoard("");
+            DisplayMyBoard("");
         }
         public void DropPiece(Piece movingPiece, int x, int y)
         {
@@ -115,7 +135,7 @@ namespace Battleship
                 layout[x, y + i] = '0';
             }
         }
-        public bool MoveRight(Piece movingPiece, int a, int b)
+        public bool MovePieceRight(Piece movingPiece, int a, int b)
         {
             bool moved = false;
             int counter = 0;
@@ -146,7 +166,7 @@ namespace Battleship
             }
             return moved;
         }
-        public bool MoveLeft(Piece movingPiece, int a, int b)
+        public bool MovePieceLeft(Piece movingPiece, int a, int b)
         {
             bool moved = false;
             int counter = 0;
@@ -177,7 +197,7 @@ namespace Battleship
             }
             return moved;
         }
-        public bool MoveUp(Piece movingPiece, int a, int b)
+        public bool MovePieceUp(Piece movingPiece, int a, int b)
         {
             bool moved = false;
             int counter = 0;
@@ -211,7 +231,7 @@ namespace Battleship
             }
             return moved;
         }
-        public bool MoveDown(Piece movingPiece, int a, int b)
+        public bool MovePieceDown(Piece movingPiece, int a, int b)
         {
             bool moved = false;
             int counter = 0;
@@ -286,6 +306,99 @@ namespace Battleship
                     movingPiece.horizontal = !movingPiece.horizontal;
                 }
             }
+        }
+        public void MoveCursor()
+        {
+            int x = 1;
+            int y = 1;
+            bool KeepGoing = true;
+            layout[x, y] = '+';
+            do
+            {
+                DisplayTargetBoard($"Where do you want to attack?");
+                ConsoleKey buttonPress = Console.ReadKey().Key;
+                if (buttonPress == ConsoleKey.RightArrow)
+                {
+                    bool moved = MoveCursorRight(x, y);
+                    if(moved)
+                    {
+                        y++;
+                    }
+                }
+                else if (buttonPress == ConsoleKey.LeftArrow)
+                {
+                    bool moved = MoveCursorLeft(x, y);
+                    if(moved)
+                    {
+                        y--;
+                    }
+                }
+                else if (buttonPress == ConsoleKey.UpArrow)
+                {
+                    bool moved = MoveCursorUp(x, y);
+                    if(moved)
+                    {
+                        x--;
+                    }
+                }
+                else if (buttonPress == ConsoleKey.DownArrow)
+                {
+                    bool moved = MoveCursorDown(x, y);
+                    if(moved)
+                    {
+                        x++;
+                    }
+                }
+                else if (buttonPress == ConsoleKey.Enter)
+                {
+                    KeepGoing = false;
+                }
+            }
+            while (KeepGoing);
+        }
+        public bool MoveCursorRight(int a, int b)
+        {
+            bool moved = false;
+            if (layout[a, b + 1] == '.')
+            {
+                layout[a, b] = '.';
+                layout[a, b + 1] = '+';
+                moved = true;
+            }
+            return moved;
+        }
+        public bool MoveCursorLeft(int a, int b)
+        {
+            bool moved = false;
+            if (layout[a, b - 1] == '.')
+            {
+                layout[a, b] = '.';
+                layout[a, b - 1] = '+';
+                moved = true;
+            }
+            return moved;
+        }
+        public bool MoveCursorUp(int a, int b)
+        {
+            bool moved = false;
+            if (layout[a - 1, b] == '.')
+            {
+                layout[a, b] = '.';
+                layout[a - 1, b] = '+';
+                moved = true;
+            }
+            return moved;
+        }
+        public bool MoveCursorDown(int a, int b)
+        {
+            bool moved = false;
+            if (layout[a + 1, b] == '.')
+            {
+                layout[a, b] = '.';
+                layout[a + 1, b] = '+';
+                moved = true;
+            }
+            return moved;
         }
     }
 }

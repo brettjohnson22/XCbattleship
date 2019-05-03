@@ -48,10 +48,10 @@ namespace Battleship
             carrier = new Carrier();
             myBoard.PlacePiece(carrier);
         }
-        //public void LaunchAttack(int x, int y)
-        //{
+        public void LaunchAttack(Board EnemyBoard, int x, int y)
+        {
 
-        //}
+        }
 
     }
 }
