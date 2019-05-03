@@ -15,6 +15,8 @@ namespace Battleship
         //constructor (SPAWNER)
         public Game()
         {
+            Console.WriteLine("Welcome to Battleship! By Brett Johnson");
+            Console.ReadLine();
             RunGame();
         }
         //member methods (CAN DO)
@@ -33,15 +35,16 @@ namespace Battleship
         }
         public void PlayerTurn(Player currentplayer, Player currentopponent)
         {
-            Console.WriteLine($"{currentplayer.name}'s Turn");
-            Console.ReadLine();
-            currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
-            int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
-            bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, coordinates[0], coordinates[1]);
-            if(hit)
-            {
-                currentplayer.score++;
-            }
+            AttackOptions(currentplayer, currentopponent);
+            //Console.WriteLine($"{currentplayer.name}'s Turn.");
+            //Console.ReadLine();
+            //currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
+            //int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
+            //bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, coordinates[0], coordinates[1]);
+            //if(hit)
+            //{
+            //    currentplayer.score++;
+            //}
         }
         public void RunGame()
         {
@@ -69,6 +72,38 @@ namespace Battleship
             player.PlaceCarrier();
             Console.Clear();
         }
+        public void AttackOptions(Player currentplayer, Player currentopponent)
+        {
+            bool keepGoing = true;
+            do
+            {
+                Console.WriteLine($"{currentplayer.name}'s Turn. Type 'A' for Attack or 'V' to View Own Board");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "a":
+                        goto case "A";
+                    case "A":
+                        currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
+                        int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
+                        bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, coordinates[0], coordinates[1]);
+                        if (hit)
+                        {
+                            currentplayer.score++;
+                        }
+                        keepGoing = false;
+                        break;
+                    case "v":
+                        goto case "V";
+                    case "V":
+                        currentplayer.myBoard.DisplayBoard("These are your ships. Keep them safe!");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                }
+            }
+            while (keepGoing);
+        }
         public bool ResolveAttack(Board boardBeingAttacked, Board playersTargetBoard, int x, int y)
         {
             bool hit = false;
@@ -77,8 +112,9 @@ namespace Battleship
                 boardBeingAttacked.layout[x, y] = 'X';
                 playersTargetBoard.layout[x, y] = 'X';
                 Console.WriteLine("Hit!");
-                Console.ReadLine();
                 hit = true;
+                Console.ReadLine();
+                Console.Clear();
             }
             else
             {
@@ -86,6 +122,7 @@ namespace Battleship
                 playersTargetBoard.layout[x, y] = 'M';
                 Console.WriteLine("Miss!");
                 Console.ReadLine();
+                Console.Clear();
             }
             return hit;
         }

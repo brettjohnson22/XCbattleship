@@ -11,18 +11,17 @@ namespace Battleship
         static void Main(string[] args)
         {
             new Game();
-            
-
-            //Board board = new Board();
-            //game.ResizeWindow();
-            //board.GenerateBoard();
-            //board.DisplayBoard();
-            //board.DropChar(5, 10, 'X');
-            //board.DisplayBoard();
-            //board.MovePiece();
         }
     }
 }
+
+//BUGS:Cursor placement after Hit/Miss in first square
+//Possible to trap cursor
+//
+//NEEDED FEATURES:
+//Identify when ships are sunk
+
+
 //I need to figure out how to display a gameboard (array of arrays?)
 //The arrays will store values (undiscovered:empty, ship, discovered:hit ship, miss)
 //There should be a position label on x and y axis
@@ -65,3 +64,5 @@ namespace Battleship
 
 //I need the cursor to move around a board that reflects hits and misses, but not enemy ship placement.
 //At the start of the turn, I need to create a new board that looks at 
+
+
