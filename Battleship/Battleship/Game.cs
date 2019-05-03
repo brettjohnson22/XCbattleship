@@ -31,25 +31,38 @@ namespace Battleship
             Console.SetWindowSize(60, 25);
             Console.WriteLine(Console.WindowWidth);
             Console.WriteLine(Console.WindowHeight);
-
         }
 
         public void PlayerTurn(Player currentplayer, Player currentopponent)
         {
             currentopponent.myBoard.DisplayTargetBoard("Where would you like to attack?");
+            player1.myBoard.MoveCursor();
 
         }
         public void RunGame()
         {
             player1 = new Player();
-            ResizeWindow();
-            player1.CreateBoard();
-            player1.PlaceDestroyer();
-            player1.PlaceSub();
-            player1.PlaceBattleship();
-            player1.PlaceCarrier();
-            player1.myBoard.MoveCursor();
+            player2 = new Player();
+            GetPlayerNames();
+           // ResizeWindow();
+            SetBoard(player1);
+            SetBoard(player2);
         }
+
+        public void SetBoard(Player player)
+        {
+            Console.WriteLine($"{player.name}, hit 'Enter' to place your pieces.");
+            Console.ReadLine();
+            player.CreateBoard();
+            player.PlaceDestroyer();
+            player.PlaceSub();
+            player.PlaceBattleship();
+            player.PlaceCarrier();
+            Console.Clear();
+            Console.WriteLine("Enter to Proceed.");
+            Console.ReadLine();
+        }
+
     }
 
 }
