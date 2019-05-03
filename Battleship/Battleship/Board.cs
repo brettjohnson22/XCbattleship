@@ -91,6 +91,10 @@ namespace Battleship
                     MoveDown(movingPiece, x, y);
                     x++;
                 }
+                else if (buttonPress == ConsoleKey.F)
+                {
+                    FlipPiece(movingPiece, x, y);
+                }
                 else if (buttonPress == ConsoleKey.Enter)
                 {
                     KeepGoing = false;
@@ -108,29 +112,87 @@ namespace Battleship
         }
         public void MoveRight(Piece movingPiece, int a, int b)
         {
-            layout[a, b] = '.';
-            layout[a, b + movingPiece.pieceSize] = '0';
+            if (movingPiece.horizontal)
+            {
+                layout[a, b] = '.';
+                layout[a, b + movingPiece.pieceSize] = '0';
+            }
+            else
+            {
+                for (int i = 0; i < movingPiece.pieceSize; i++)
+                {
+                    layout[a, b + i] = '.';
+                    layout[a + 1, b + i] = '0';
+                }
+            }
         }
         public void MoveLeft(Piece movingPiece, int a, int b)
         {
-            layout[a, b + (movingPiece.pieceSize - 1)] = '.';
-            layout[a, b - 1] = '0';
+            if (movingPiece.horizontal)
+            {
+                layout[a, b + (movingPiece.pieceSize - 1)] = '.';
+                layout[a, b - 1] = '0';
+            }
+            else
+            {
+                for (int i = 0; i < movingPiece.pieceSize; i++)
+                {
+                    layout[a, b + i] = '.';
+                    layout[a - 1, b + i] = '0';
+                }
+            }
         }
         public void MoveUp(Piece movingPiece, int a, int b)
         {
-            for (int i = 0; i < movingPiece.pieceSize; i++)
+            if (movingPiece.horizontal)
             {
-                layout[a, b + i] = '.';
-                layout[a - 1, b + i] = '0';
+                for (int i = 0; i < movingPiece.pieceSize; i++)
+                {
+                    layout[a, b + i] = '.';
+                    layout[a - 1, b + i] = '0';
+                }
+            }
+            else
+            {
+                layout[a, b] = '.';
+                layout[a - movingPiece.pieceSize, b] = '0';
             }
         }
         public void MoveDown(Piece movingPiece, int a, int b)
         {
-            for (int i = 0; i < movingPiece.pieceSize; i++)
+            if (movingPiece.horizontal)
             {
-                layout[a, b + i] = '.';
-                layout[a + 1, b + i] = '0';
+                for (int i = 0; i < movingPiece.pieceSize; i++)
+                {
+                    layout[a, b + i] = '.';
+                    layout[a + 1, b + i] = '0';
+                }
             }
+            else
+            {
+                layout[a, b] = '.';
+                layout[a + movingPiece.pieceSize, b] = '0';
+            }
+        }
+        public void FlipPiece(Piece movingPiece, int a, int b)
+        {
+            if (movingPiece.horizontal)
+            {
+                for (int i = 1; i < movingPiece.pieceSize; i++)
+                {
+                    layout[a, b + i] = '.';
+                    layout[a + i, b] = '0';
+                }
+            }
+            else
+            {
+                for (int i = 1; i < movingPiece.pieceSize; i++)
+                {
+                    layout[a, b + i] = '0';
+                    layout[a + i, b] = '.';
+                }
+            }
+            movingPiece.horizontal = !movingPiece.horizontal;
         }
     }
 }
