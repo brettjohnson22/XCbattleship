@@ -157,13 +157,6 @@ namespace Battleship
             }
             return moved;
         }
-        public void LaunchAttack(Board EnemyBoard, int x, int y)
-        {
-            if (EnemyBoard.layout[x, y] == '0')
-            {
-
-            }
-        }
     }
 }
 
