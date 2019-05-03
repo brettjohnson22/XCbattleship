@@ -96,7 +96,7 @@ namespace Battleship
                     case "v":
                         goto case "V";
                     case "V":
-                        currentplayer.myBoard.DisplayBoard("These are your ships. Keep them safe!");
+                        currentplayer.myBoard.DisplayBoard($"These are your ships. You have {currentplayer.score} points.");
                         Console.ReadLine();
                         Console.Clear();
                         break;
@@ -116,7 +116,7 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else
+            else 
             {
                 boardBeingAttacked.layout[x, y] = 'M';
                 playersTargetBoard.layout[x, y] = 'M';
