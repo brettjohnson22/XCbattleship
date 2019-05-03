@@ -10,14 +10,11 @@ namespace Battleship
     {
         //member variables (HAS A)
         public char[,] layout;
-        public int x;
-        public int y;
 
         //constructor (SPAWNER)
         public Board()
         {
-            x = 1;
-            y = 1;
+
         }
         //member methods (CAN DO)
         public void GenerateBoard()
@@ -57,15 +54,15 @@ namespace Battleship
             }
         }
 
-        public void DropChar(int x, int y, char a)
-        {
-            layout[x, y] = a;
-        }
+        //public void DropChar(int x, int y, char a)
+        //{
+        //    layout[x, y] = a;
+        //}
 
         public void PlacePiece(Piece movingPiece)
         {
-            x = 1;
-            y = 1;
+            int x = 1;
+            int y = 1;
             //Somehow store "current place?"
             DropPiece(movingPiece, x, y);
             DisplayBoard();
@@ -77,18 +74,22 @@ namespace Battleship
                 if (buttonPress == ConsoleKey.RightArrow && layout[x, y + movingPiece.pieceSize] == '.')
                 {
                     MoveRight(movingPiece, x, y);
+                    y++;
                 }
                 else if (buttonPress == ConsoleKey.LeftArrow && layout[x, y - 1] == '.')
                 {
                     MoveLeft(movingPiece, x, y);
+                    y--;
                 }
                 else if (buttonPress == ConsoleKey.UpArrow && x != 1)
                 {
                     MoveUp(movingPiece, x, y);
+                    x--;
                 }
                 else if (buttonPress == ConsoleKey.DownArrow && x != 20)
                 {
                     MoveDown(movingPiece, x, y);
+                    x++;
                 }
                 else if (buttonPress == ConsoleKey.Enter)
                 {
@@ -109,13 +110,11 @@ namespace Battleship
         {
             layout[a, b] = '.';
             layout[a, b + movingPiece.pieceSize] = '0';
-            y++;
         }
         public void MoveLeft(Piece movingPiece, int a, int b)
         {
             layout[a, b + (movingPiece.pieceSize - 1)] = '.';
             layout[a, b - 1] = '0';
-            y--;
         }
         public void MoveUp(Piece movingPiece, int a, int b)
         {
@@ -124,7 +123,6 @@ namespace Battleship
                 layout[a, b + i] = '.';
                 layout[a - 1, b + i] = '0';
             }
-            x--;
         }
         public void MoveDown(Piece movingPiece, int a, int b)
         {
@@ -133,7 +131,6 @@ namespace Battleship
                 layout[a, b + i] = '.';
                 layout[a + 1, b + i] = '0';
             }
-            x++;
         }
     }
 }
