@@ -10,7 +10,8 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-            new Game();
+            Game game = new Game();
+            game.RunGame();
         }
     }
 }

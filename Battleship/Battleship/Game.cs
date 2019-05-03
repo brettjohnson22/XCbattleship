@@ -15,13 +15,12 @@ namespace Battleship
         //constructor (SPAWNER)
         public Game()
         {
-            Console.WriteLine("Welcome to Battleship! By Brett Johnson");
-            Console.ReadLine();
-            RunGame();
         }
         //member methods (CAN DO)
         public void RunGame()
         {
+            Console.WriteLine("Welcome to Battleship! By Brett Johnson");
+            Console.ReadLine();
             player1 = new Player();
             player2 = new Player();
             ResizeWindow();
@@ -82,6 +81,8 @@ namespace Battleship
                 string input = Console.ReadLine();
                 switch (input)
                 {
+                    case "":
+                        goto case "A";
                     case "a":
                         goto case "A";
                     case "A":
