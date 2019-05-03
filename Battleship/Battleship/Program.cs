@@ -10,18 +10,16 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-            Game game = new Game();
-            Board board = new Board();
-            game.ResizeWindow();
-            board.GenerateBoard();
-            board.DisplayBoard();
-            board.DropChar(5, 10, 'X');
-            board.DisplayBoard();
-            board.ShowPiece();
+            new Game();
+            
 
-            //Game game = new Game();
+            //Board board = new Board();
             //game.ResizeWindow();
-            //Console.ReadLine();
+            //board.GenerateBoard();
+            //board.DisplayBoard();
+            //board.DropChar(5, 10, 'X');
+            //board.DisplayBoard();
+            //board.MovePiece();
         }
     }
 }

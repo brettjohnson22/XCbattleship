@@ -15,8 +15,7 @@ namespace Battleship
         //constructor (SPAWNER)
         public Game()
         {
-            player1 = new Player();
-            player2 = new Player();
+            RunGame();
         }
         //member methods (CAN DO)
 
@@ -39,5 +38,16 @@ namespace Battleship
         {
 
         }
+        public void RunGame()
+        {
+            player1 = new Player();
+            ResizeWindow();
+            player1.CreateBoard();
+            player1.PlaceDestroyer();
+            player1.PlaceSub();
+            player1.PlaceBattleship();
+            player1.PlaceCarrier();
+        }
     }
+
 }

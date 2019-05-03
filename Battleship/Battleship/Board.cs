@@ -10,11 +10,14 @@ namespace Battleship
     {
         //member variables (HAS A)
         public char[,] layout;
+        public int x;
+        public int y;
 
         //constructor (SPAWNER)
         public Board()
         {
-            
+            x = 1;
+            y = 1;
         }
         //member methods (CAN DO)
         public void GenerateBoard()
@@ -59,53 +62,78 @@ namespace Battleship
             layout[x, y] = a;
         }
 
-        public void ShowPiece()
+        public void PlacePiece(Piece movingPiece)
         {
-            int x = 1;
-            int y = 1;
-            layout[x, y] = '0';
-            layout[x, y + 1] = '0';
+            x = 1;
+            y = 1;
+            //Somehow store "current place?"
+            DropPiece(movingPiece, x, y);
             DisplayBoard();
             bool KeepGoing = true;
             do
             {
                 DisplayBoard();
                 ConsoleKey buttonPress = Console.ReadKey().Key;
-                if (buttonPress == ConsoleKey.RightArrow)
+                if (buttonPress == ConsoleKey.RightArrow && layout[x, y + movingPiece.pieceSize] == '.')
                 {
-                    layout[x, y] = '.';
-                    layout[x, y + 2] = '0';
-                    y++;
+                    MoveRight(movingPiece, x, y);
                 }
-                else if (buttonPress == ConsoleKey.DownArrow)
+                else if (buttonPress == ConsoleKey.LeftArrow && layout[x, y - 1] == '.')
                 {
-                    layout[x, y] = '.';
-                    layout[x, y + 1] = '.';
-                    layout[x + 1, y] = '0';
-                    layout[x + 1, y + 1] = '0';
-                    x++;
+                    MoveLeft(movingPiece, x, y);
                 }
-                else if (buttonPress == ConsoleKey.LeftArrow)
+                else if (buttonPress == ConsoleKey.UpArrow && x != 1)
                 {
-                    layout[x, y + 1] = '.';
-                    layout[x, y - 1] = '0';
-                    y--;
+                    MoveUp(movingPiece, x, y);
                 }
-                else if (buttonPress == ConsoleKey.UpArrow)
+                else if (buttonPress == ConsoleKey.DownArrow && x != 20)
                 {
-                    layout[x, y] = '.';
-                    layout[x, y + 1] = '.';
-                    layout[x - 1, y] = '0';
-                    layout[x - 1, y + 1] = '0';
-                    x--;
+                    MoveDown(movingPiece, x, y);
                 }
                 else if (buttonPress == ConsoleKey.Enter)
                 {
                     KeepGoing = false;
                 }
-            } while (KeepGoing);
+            }
+            while (KeepGoing);
             DisplayBoard();
-            Console.ReadLine();
+        }
+        public void DropPiece(Piece movingPiece, int x, int y)
+        {
+            for (int i = 0; i < movingPiece.pieceSize; i++)
+            {
+                layout[x, y + i] = '0';
+            }
+        }
+        public void MoveRight(Piece movingPiece, int a, int b)
+        {
+            layout[a, b] = '.';
+            layout[a, b + movingPiece.pieceSize] = '0';
+            y++;
+        }
+        public void MoveLeft(Piece movingPiece, int a, int b)
+        {
+            layout[a, b + (movingPiece.pieceSize - 1)] = '.';
+            layout[a, b - 1] = '0';
+            y--;
+        }
+        public void MoveUp(Piece movingPiece, int a, int b)
+        {
+            for (int i = 0; i < movingPiece.pieceSize; i++)
+            {
+                layout[a, b + i] = '.';
+                layout[a - 1, b + i] = '0';
+            }
+            x--;
+        }
+        public void MoveDown(Piece movingPiece, int a, int b)
+        {
+            for (int i = 0; i < movingPiece.pieceSize; i++)
+            {
+                layout[a, b + i] = '.';
+                layout[a + 1, b + i] = '0';
+            }
+            x++;
         }
     }
 }
