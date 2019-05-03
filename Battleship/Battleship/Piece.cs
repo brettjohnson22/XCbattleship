@@ -11,6 +11,7 @@ namespace Battleship
         //member variables (HAS A)
         public int pieceSize;
         public bool horizontal;
+        public string name;
 
         //constructor (SPAWNER)
         public Piece()

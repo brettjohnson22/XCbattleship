@@ -28,7 +28,7 @@ namespace Battleship
         }
         public void ResizeWindow()
         {
-            Console.SetWindowSize(25, 25);
+            Console.SetWindowSize(60, 25);
             Console.WriteLine(Console.WindowWidth);
             Console.WriteLine(Console.WindowHeight);
 

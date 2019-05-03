@@ -14,6 +14,7 @@ namespace Battleship
         public Sub()
         {
             pieceSize = 3;
+            name = "Submarine";
         }
         //member methods (CAN DO)
     }

@@ -14,6 +14,7 @@ namespace Battleship
         public Destroyer()
         {
             pieceSize = 2;
+            name = "Destroyer";
         }
         //member methods (CAN DO)
     }

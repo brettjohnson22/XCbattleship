@@ -14,6 +14,7 @@ namespace Battleship
         public BShip()
         {
             pieceSize = 4;
+            name = "Battleship";
         }
         //member methods (CAN DO)
     }

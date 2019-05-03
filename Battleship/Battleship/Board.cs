@@ -41,7 +41,7 @@ namespace Battleship
             }
         }
 
-        public void DisplayBoard()
+        public void DisplayBoard(string Message)
         {
             Console.Clear();
             for (int i = 0; i < 22; i++)
@@ -52,18 +52,17 @@ namespace Battleship
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine(Message);
         }
         public void PlacePiece(Piece movingPiece)
         {
             int x = 1;
             int y = 1;
-            //Somehow store "current place?"
             DropPiece(movingPiece, x, y);
-            DisplayBoard();
             bool KeepGoing = true;
             do
             {
-                DisplayBoard();
+                DisplayBoard($"Place your {movingPiece.name}. 'F' to flip, 'Enter' to proceed.");
                 ConsoleKey buttonPress = Console.ReadKey().Key;
                 if (buttonPress == ConsoleKey.RightArrow)
                 {
@@ -107,7 +106,7 @@ namespace Battleship
                 }
             }
             while (KeepGoing);
-            DisplayBoard();
+            DisplayBoard("");
         }
         public void DropPiece(Piece movingPiece, int x, int y)
         {
