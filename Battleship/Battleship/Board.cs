@@ -57,7 +57,7 @@ namespace Battleship
         {
             char d = movingPiece.identifier;
             int x = 1;
-            int y = DropPiece(movingPiece, x, d);
+            int y = DropPiece(movingPiece, x);
             bool KeepGoing = true;
             do
             {
@@ -65,7 +65,7 @@ namespace Battleship
                 ConsoleKey buttonPress = Console.ReadKey().Key;
                 if (buttonPress == ConsoleKey.RightArrow)
                 {
-                    bool moved = MovePieceRight(movingPiece, x, y, d);
+                    bool moved = MovePieceRight(movingPiece, x, y);
                     if (moved)
                     {
                         y++;
@@ -73,7 +73,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.LeftArrow)
                 {
-                    bool moved = MovePieceLeft(movingPiece, x, y, d);
+                    bool moved = MovePieceLeft(movingPiece, x, y);
                     if (moved)
                     {
                         y--;
@@ -81,7 +81,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.UpArrow && x != 1)
                 {
-                    bool moved = MovePieceUp(movingPiece, x, y, d);
+                    bool moved = MovePieceUp(movingPiece, x, y);
                     if (moved)
                     {
                         x--;
@@ -89,7 +89,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.DownArrow && x != 20)
                 {
-                    bool moved = MovePieceDown(movingPiece, x, y, d);
+                    bool moved = MovePieceDown(movingPiece, x, y);
                     if (moved)
                     {
                         x++;
@@ -97,7 +97,7 @@ namespace Battleship
                 }
                 else if (buttonPress == ConsoleKey.F)
                 {
-                    FlipPiece(movingPiece, x, y, d);
+                    FlipPiece(movingPiece, x, y);
                 }
                 else if (buttonPress == ConsoleKey.Enter)
                 {
@@ -117,8 +117,9 @@ namespace Battleship
             while (KeepGoing);
             DisplayBoard("");
         }
-        public int DropPiece(Piece movingPiece, int x, char d)
+        public int DropPiece(Piece movingPiece, int x)
         {
+            char d = movingPiece.identifier;
             int y = 1;
             int counter;
             do
@@ -146,8 +147,9 @@ namespace Battleship
             while (counter != movingPiece.pieceSize);
             return y;
         }
-        public bool MovePieceRight(Piece movingPiece, int a, int b, char d)
+        public bool MovePieceRight(Piece movingPiece, int a, int b)
         {
+            char d = movingPiece.identifier;
             bool moved = false;
             int counter = 0;
             if (!movingPiece.horizontal)
@@ -177,8 +179,9 @@ namespace Battleship
             }
             return moved;
         }
-        public bool MovePieceLeft(Piece movingPiece, int a, int b, char d)
+        public bool MovePieceLeft(Piece movingPiece, int a, int b)
         {
+            char d = movingPiece.identifier;
             bool moved = false;
             int counter = 0;
             if (!movingPiece.horizontal)
@@ -208,8 +211,9 @@ namespace Battleship
             }
             return moved;
         }
-        public bool MovePieceUp(Piece movingPiece, int a, int b, char d)
+        public bool MovePieceUp(Piece movingPiece, int a, int b)
         {
+            char d = movingPiece.identifier;
             bool moved = false;
             int counter = 0;
             if (movingPiece.horizontal)
@@ -242,8 +246,9 @@ namespace Battleship
             }
             return moved;
         }
-        public bool MovePieceDown(Piece movingPiece, int a, int b, char d)
+        public bool MovePieceDown(Piece movingPiece, int a, int b)
         {
+            char d = movingPiece.identifier;
             bool moved = false;
             int counter = 0;
             if (movingPiece.horizontal)
@@ -276,8 +281,9 @@ namespace Battleship
             }
             return moved;
         }
-        public void FlipPiece(Piece movingPiece, int a, int b, char d)
+        public void FlipPiece(Piece movingPiece, int a, int b)
         {
+            char d = movingPiece.identifier;
             int counter = 0;
             if (movingPiece.horizontal && a + movingPiece.pieceSize < 22)
             {

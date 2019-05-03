@@ -20,6 +20,28 @@ namespace Battleship
             RunGame();
         }
         //member methods (CAN DO)
+        public void RunGame()
+        {
+            player1 = new Player();
+            player2 = new Player();
+            ResizeWindow();
+            GetPlayerNames();
+            SetBoard(player1);
+            SetBoard(player2);
+            while (player1.score < 14 && player2.score < 14)
+            {
+                PlayerTurn(player1, player2);
+                if (player1.score < 14)
+                {
+                    PlayerTurn(player2, player1);
+                }
+            }
+            GameOver();
+        }
+        public void ResizeWindow()
+        {
+            Console.SetWindowSize(60, 25);
+        }
         public void GetPlayerNames()
         {
             Console.WriteLine("What is Player One's Name?");
@@ -27,11 +49,16 @@ namespace Battleship
             Console.WriteLine("What is Player Two's Name?");
             player2.name = Console.ReadLine();
         }
-        public void ResizeWindow()
+        public void SetBoard(Player player)
         {
-            Console.SetWindowSize(60, 25);
-            Console.WriteLine(Console.WindowWidth);
-            Console.WriteLine(Console.WindowHeight);
+            Console.WriteLine($"{player.name}, hit 'Enter' to place your pieces.");
+            Console.ReadLine();
+            player.CreateBoards();
+            player.PlaceDestroyer();
+            player.PlaceSub();
+            player.PlaceBattleship();
+            player.PlaceCarrier();
+            Console.Clear();
         }
         public void PlayerTurn(Player currentplayer, Player currentopponent)
         {
@@ -45,32 +72,6 @@ namespace Battleship
             //{
             //    currentplayer.score++;
             //}
-        }
-        public void RunGame()
-        {
-            player1 = new Player();
-            player2 = new Player();
-            GetPlayerNames();
-            //ResizeWindow();
-            SetBoard(player1);
-            SetBoard(player2);
-            while (player1.score < 14 && player2.score < 14)
-            {
-                PlayerTurn(player1, player2);
-                PlayerTurn(player2, player1);
-            }
-            GameOver();
-        }
-        public void SetBoard(Player player)
-        {
-            Console.WriteLine($"{player.name}, hit 'Enter' to place your pieces.");
-            Console.ReadLine();
-            player.CreateBoards();
-            player.PlaceDestroyer();
-            player.PlaceSub();
-            player.PlaceBattleship();
-            player.PlaceCarrier();
-            Console.Clear();
         }
         public void AttackOptions(Player currentplayer, Player currentopponent)
         {
@@ -86,7 +87,7 @@ namespace Battleship
                     case "A":
                         currentplayer.targetBoard.DisplayBoard("Where would you like to attack?");
                         int[] coordinates = currentplayer.AimAttack(currentplayer.targetBoard);
-                        bool hit = ResolveAttack(currentopponent.myBoard, currentplayer.targetBoard, currentopponent, coordinates[0], coordinates[1]);
+                        bool hit = ResolveAttack(currentplayer, currentopponent, coordinates[0], coordinates[1]);
                         if (hit)
                         {
                             currentplayer.score++;
@@ -104,17 +105,17 @@ namespace Battleship
             }
             while (keepGoing);
         }
-        public bool ResolveAttack(Board boardBeingAttacked, Board playersTargetBoard, Player currentopponent, int x, int y)
+        public bool ResolveAttack(Player currentplayer, Player currentopponent, int x, int y)
         {
             bool hit = false;
-            if (boardBeingAttacked.layout[x, y] == 'D')
+            if (currentopponent.myBoard.layout[x, y] == 'D')
             {
-                boardBeingAttacked.layout[x, y] = 'X';
-                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = 'X';
+                currentplayer.targetBoard.layout[x, y] = 'X';
                 currentopponent.destroyer.hitPointCounter--;
                 if (currentopponent.destroyer.hitPointCounter == 0)
                 {
-                    Console.WriteLine($"Hit! {currentopponent.name}'s Destroyer has sunk!");
+                    Console.WriteLine($"Hit! {currentplayer.name} has sunk {currentopponent.name}'s Destroyer!");
                 }
                 else
                 {
@@ -124,14 +125,14 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else if (boardBeingAttacked.layout[x, y] == 'S')
+            else if (currentopponent.myBoard.layout[x, y] == 'S')
             {
-                boardBeingAttacked.layout[x, y] = 'X';
-                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = 'X';
+                currentplayer.targetBoard.layout[x, y] = 'X';
                 currentopponent.sub.hitPointCounter--;
                 if (currentopponent.sub.hitPointCounter == 0)
                 {
-                    Console.WriteLine($"Hit! {currentopponent.name}'s Submarine has sunk!");
+                    Console.WriteLine($"Hit! {currentplayer.name} has sunk {currentopponent.name}'s Submarine!");
                 }
                 else
                 {
@@ -141,14 +142,14 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else if (boardBeingAttacked.layout[x, y] == 'B')
+            else if (currentopponent.myBoard.layout[x, y] == 'B')
             {
-                boardBeingAttacked.layout[x, y] = 'X';
-                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = 'X';
+                currentplayer.targetBoard.layout[x, y] = 'X';
                 currentopponent.bShip.hitPointCounter--;
                 if (currentopponent.bShip.hitPointCounter == 0)
                 {
-                    Console.WriteLine($"Hit! {currentopponent.name}'s Battleship has sunk!");
+                    Console.WriteLine($"Hit! {currentplayer.name} has sunk {currentopponent.name}'s Battleship!");
                 }
                 else
                 {
@@ -158,14 +159,14 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else if (boardBeingAttacked.layout[x, y] == 'C')
+            else if (currentopponent.myBoard.layout[x, y] == 'C')
             {
-                boardBeingAttacked.layout[x, y] = 'X';
-                playersTargetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = 'X';
+                currentplayer.targetBoard.layout[x, y] = 'X';
                 currentopponent.carrier.hitPointCounter--;
                 if (currentopponent.carrier.hitPointCounter == 0)
                 {
-                    Console.WriteLine($"Hit! {currentopponent.name}'s Aircraft Carrier has sunk!");
+                    Console.WriteLine($"Hit! {currentplayer.name} has sunk {currentopponent.name}'s Aircraft Carrier!");
                 }
                 else
                 {
@@ -177,8 +178,8 @@ namespace Battleship
             }
             else 
             {
-                boardBeingAttacked.layout[x, y] = 'M';
-                playersTargetBoard.layout[x, y] = 'M';
+                currentopponent.myBoard.layout[x, y] = 'M';
+                currentplayer.targetBoard.layout[x, y] = 'M';
                 Console.WriteLine("Miss!");
                 Console.ReadLine();
                 Console.Clear();

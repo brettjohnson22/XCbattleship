@@ -21,5 +21,6 @@ namespace Battleship
             horizontal = true;
         }
         //member methods (CAN DO)
+
     }
 }

@@ -15,7 +15,7 @@ namespace Battleship
     }
 }
 
-//BUGS:Cursor placement after Hit/Miss in first square
+//BUGS:
 //Possible to trap cursor
 //
 
