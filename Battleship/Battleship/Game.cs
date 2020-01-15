@@ -39,7 +39,7 @@ namespace Battleship
         }
         public void ResizeWindow()
         {
-            Console.SetWindowSize(60, 25);
+            Console.SetWindowSize(70, 25);
         }
         public void GetPlayerNames()
         {
@@ -75,6 +75,7 @@ namespace Battleship
                         break;
                 }
             }
+            Console.Clear();
         }
         public void SetBoard(Player player)
         {
@@ -124,10 +125,10 @@ namespace Battleship
         public bool ResolveAttack(Player currentplayer, Player currentopponent, int x, int y)
         {
             bool hit = false;
-            if (currentopponent.myBoard.layout[x, y] == 'D')
+            if (currentopponent.myBoard.layout[x, y] == "[D]")
             {
-                currentopponent.myBoard.layout[x, y] = 'X';
-                currentplayer.targetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = "[X]";
+                currentplayer.targetBoard.layout[x, y] = "[X]";
                 currentopponent.destroyer.hitPointCounter--;
                 if (currentopponent.destroyer.hitPointCounter == 0)
                 {
@@ -141,10 +142,10 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else if (currentopponent.myBoard.layout[x, y] == 'S')
+            else if (currentopponent.myBoard.layout[x, y] == "[S]")
             {
-                currentopponent.myBoard.layout[x, y] = 'X';
-                currentplayer.targetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = "[X]";
+                currentplayer.targetBoard.layout[x, y] = "[X]";
                 currentopponent.sub.hitPointCounter--;
                 if (currentopponent.sub.hitPointCounter == 0)
                 {
@@ -158,10 +159,10 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else if (currentopponent.myBoard.layout[x, y] == 'B')
+            else if (currentopponent.myBoard.layout[x, y] == "[B]")
             {
-                currentopponent.myBoard.layout[x, y] = 'X';
-                currentplayer.targetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = "[X]";
+                currentplayer.targetBoard.layout[x, y] = "[X]";
                 currentopponent.bShip.hitPointCounter--;
                 if (currentopponent.bShip.hitPointCounter == 0)
                 {
@@ -175,10 +176,10 @@ namespace Battleship
                 Console.ReadLine();
                 Console.Clear();
             }
-            else if (currentopponent.myBoard.layout[x, y] == 'C')
+            else if (currentopponent.myBoard.layout[x, y] == "[C]")
             {
-                currentopponent.myBoard.layout[x, y] = 'X';
-                currentplayer.targetBoard.layout[x, y] = 'X';
+                currentopponent.myBoard.layout[x, y] = "[X]";
+                currentplayer.targetBoard.layout[x, y] = "[X]";
                 currentopponent.carrier.hitPointCounter--;
                 if (currentopponent.carrier.hitPointCounter == 0)
                 {
@@ -194,8 +195,8 @@ namespace Battleship
             }
             else 
             {
-                currentopponent.myBoard.layout[x, y] = 'M';
-                currentplayer.targetBoard.layout[x, y] = 'M';
+                currentopponent.myBoard.layout[x, y] = "[M]";
+                currentplayer.targetBoard.layout[x, y] = "[M]";
                 Console.WriteLine("Miss!");
                 Console.ReadLine();
                 Console.Clear();

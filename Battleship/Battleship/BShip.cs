@@ -15,7 +15,7 @@ namespace Battleship
         {
             pieceSize = 4;
             name = "Battleship";
-            identifier = 'B';
+            identifier = "[B]";
             hitPointCounter = 4;
 
         }

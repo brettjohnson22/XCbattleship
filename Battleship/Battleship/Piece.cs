@@ -12,7 +12,7 @@ namespace Battleship
         public int pieceSize;
         public bool horizontal;
         public string name;
-        public char identifier;
+        public string identifier;
         public int hitPointCounter;
 
         //constructor (SPAWNER)

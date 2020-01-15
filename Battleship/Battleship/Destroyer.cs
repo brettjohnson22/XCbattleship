@@ -15,7 +15,7 @@ namespace Battleship
         {
             pieceSize = 2;
             name = "Destroyer";
-            identifier = 'D';
+            identifier = "[D]";
             hitPointCounter = 2;
         }
         //member methods (CAN DO)

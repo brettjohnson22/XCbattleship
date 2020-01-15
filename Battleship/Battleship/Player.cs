@@ -57,7 +57,7 @@ namespace Battleship
             int x = 1;
             int y = 1;
             bool KeepGoing = true;
-            for(int i = 1; mytargetboard.layout[x, y] != '.'; i++)
+            for(int i = 1; mytargetboard.layout[x, y] != "[ ]"; i++)
             {
                 if (y == 21)
                 {
@@ -69,7 +69,7 @@ namespace Battleship
                     y++;
                 }
             }
-            mytargetboard.layout[x, y] = '+';
+            mytargetboard.layout[x, y] = "+";
             do
             {
                 //char R = mytargetboard.layout[x, y + 1];
@@ -124,10 +124,10 @@ namespace Battleship
         public bool MoveCursorRight(Board mytargetboard, int a, int b)
         {
             bool moved = false;
-            if (mytargetboard.layout[a, b + 1] == '.')
+            if (mytargetboard.layout[a, b + 1] == "[ ]")
             {
-                mytargetboard.layout[a, b] = '.';
-                mytargetboard.layout[a, b + 1] = '+';
+                mytargetboard.layout[a, b] = "[ ]";
+                mytargetboard.layout[a, b + 1] = "+";
                 moved = true;
             }
             return moved;
@@ -135,10 +135,10 @@ namespace Battleship
         public bool MoveCursorLeft(Board mytargetboard, int a, int b)
         {
             bool moved = false;
-            if (mytargetboard.layout[a, b - 1] == '.')
+            if (mytargetboard.layout[a, b - 1] == "[ ]")
             {
-                mytargetboard.layout[a, b] = '.';
-                mytargetboard.layout[a, b - 1] = '+';
+                mytargetboard.layout[a, b] = "[ ]";
+                mytargetboard.layout[a, b - 1] = "+";
                 moved = true;
             }
             return moved;
@@ -146,10 +146,10 @@ namespace Battleship
         public bool MoveCursorUp(Board mytargetboard, int a, int b)
         {
             bool moved = false;
-            if (mytargetboard.layout[a - 1, b] == '.')
+            if (mytargetboard.layout[a - 1, b] == "[ ]")
             {
-                mytargetboard.layout[a, b] = '.';
-                mytargetboard.layout[a - 1, b] = '+';
+                mytargetboard.layout[a, b] = "[ ]";
+                mytargetboard.layout[a - 1, b] = "+";
                 moved = true;
             }
             return moved;
@@ -157,10 +157,10 @@ namespace Battleship
         public bool MoveCursorDown(Board mytargetboard, int a, int b)
         {
             bool moved = false;
-            if (mytargetboard.layout[a + 1, b] == '.')
+            if (mytargetboard.layout[a + 1, b] == "[ ]")
             {
-                mytargetboard.layout[a, b] = '.';
-                mytargetboard.layout[a + 1, b] = '+';
+                mytargetboard.layout[a, b] = "[ ]";
+                mytargetboard.layout[a + 1, b] = "+";
                 moved = true;
             }
             return moved;
