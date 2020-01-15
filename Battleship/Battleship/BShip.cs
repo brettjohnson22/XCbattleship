@@ -8,17 +8,12 @@ namespace Battleship
 {
     public class BShip : Piece
     {
-        //member variables (HAS A)
-
-        //constructor (SPAWNER)
         public BShip()
         {
             pieceSize = 4;
             name = "Battleship";
             identifier = "[B]";
             hitPointCounter = 4;
-
         }
-        //member methods (CAN DO)
     }
 }

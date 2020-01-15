@@ -8,9 +8,6 @@ namespace Battleship
 {
     public class Sub : Piece
     {
-        //member variables (HAS A)
-
-        //constructor (SPAWNER)
         public Sub()
         {
             pieceSize = 3;
@@ -18,6 +15,5 @@ namespace Battleship
             identifier = "[S]";
             hitPointCounter = 3;
         }
-        //member methods (CAN DO)
     }
 }

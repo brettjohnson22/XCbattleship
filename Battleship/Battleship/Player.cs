@@ -8,22 +8,20 @@ namespace Battleship
 {
     public class Player
     {
-        //member variables (HAS A)
         public string name;
-        public Board myBoard; //Holds my ships
-        public Board targetBoard; //Holds my knowledge of the enemy's ships.
+        public Board myBoard;
+        public Board targetBoard; 
         public Piece destroyer;
         public Piece sub;
         public Piece bShip;
         public Piece carrier;
         public int score;
 
-        //constructor (SPAWNER)
         public Player()
         {
             score = 0;
         }
-        //member methods (CAN DO)
+
         public void CreateBoards()
         {
             myBoard = new Board();
@@ -69,13 +67,9 @@ namespace Battleship
                     y++;
                 }
             }
-            mytargetboard.layout[x, y] = "+";
+            mytargetboard.layout[x, y] = "[+]";
             do
             {
-                //char R = mytargetboard.layout[x, y + 1];
-                //char L = mytargetboard.layout[x, y - 1];
-                //char U = mytargetboard.layout[x - 1, y];
-                //char D = mytargetboard.layout[x + 1, y];
                 
                 mytargetboard.DisplayBoard($"Where do you want to attack?");
                 ConsoleKey buttonPress = Console.ReadKey().Key;
@@ -127,7 +121,7 @@ namespace Battleship
             if (mytargetboard.layout[a, b + 1] == "[ ]")
             {
                 mytargetboard.layout[a, b] = "[ ]";
-                mytargetboard.layout[a, b + 1] = "+";
+                mytargetboard.layout[a, b + 1] = "[+]";
                 moved = true;
             }
             return moved;
@@ -138,7 +132,7 @@ namespace Battleship
             if (mytargetboard.layout[a, b - 1] == "[ ]")
             {
                 mytargetboard.layout[a, b] = "[ ]";
-                mytargetboard.layout[a, b - 1] = "+";
+                mytargetboard.layout[a, b - 1] = "[+]";
                 moved = true;
             }
             return moved;
@@ -149,7 +143,7 @@ namespace Battleship
             if (mytargetboard.layout[a - 1, b] == "[ ]")
             {
                 mytargetboard.layout[a, b] = "[ ]";
-                mytargetboard.layout[a - 1, b] = "+";
+                mytargetboard.layout[a - 1, b] = "[+]";
                 moved = true;
             }
             return moved;
@@ -160,7 +154,7 @@ namespace Battleship
             if (mytargetboard.layout[a + 1, b] == "[ ]")
             {
                 mytargetboard.layout[a, b] = "[ ]";
-                mytargetboard.layout[a + 1, b] = "+";
+                mytargetboard.layout[a + 1, b] = "[+]";
                 moved = true;
             }
             return moved;

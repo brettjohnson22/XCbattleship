@@ -8,22 +8,20 @@ namespace Battleship
 {
     class Game
     {
-        //member variables (HAS A)
         public Player player1;
         public Player player2;
 
-        //constructor (SPAWNER)
         public Game()
         {
-        }
-        //member methods (CAN DO)
-        public void RunGame()
-        {
-            Console.WriteLine("Welcome to Battleship! By Brett Johnson");
-            Console.ReadLine();
             player1 = new Player();
             player2 = new Player();
+        }
+
+        public void RunGame()
+        {
             ResizeWindow();
+            Console.WriteLine("Welcome to Battleship! By Brett Johnson");
+            Console.ReadLine();
             GetPlayerNames();
             SetBoard(player1);
             SetBoard(player2);
@@ -39,7 +37,9 @@ namespace Battleship
         }
         public void ResizeWindow()
         {
-            Console.SetWindowSize(70, 25);
+            Console.SetWindowSize(63, 24);
+            Console.BufferWidth = 63;
+            Console.BufferHeight = 24;
         }
         public void GetPlayerNames()
         {

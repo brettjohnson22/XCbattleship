@@ -8,9 +8,6 @@ namespace Battleship
 {
     public class Carrier : Piece
     {
-        //member variables (HAS A)
-
-        //constructor (SPAWNER)
         public Carrier()
         {
             pieceSize = 5;
@@ -18,6 +15,5 @@ namespace Battleship
             identifier = "[C]";
             hitPointCounter = 5;
         }
-        //member methods (CAN DO)
     }
 }

@@ -8,15 +8,13 @@ namespace Battleship
 {
     public class Board
     {
-        //member variables (HAS A)
         public string[,] layout;
 
-        //constructor (SPAWNER)
         public Board()
         {
 
         }
-        //member methods (CAN DO)
+
         public void GenerateBoard()
         {
             layout = new string[22, 22];
